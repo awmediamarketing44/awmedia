@@ -1,6 +1,12 @@
-FROM caddy:2-alpine
+FROM node:20-alpine
 
-COPY Caddyfile /etc/caddy/Caddyfile
-COPY index.html /srv/
-COPY styles.css /srv/
-COPY script.js /srv/
+WORKDIR /app
+
+COPY package.json package-lock.json* ./
+RUN npm ci --omit=dev || npm install --omit=dev
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["node", "server.js"]

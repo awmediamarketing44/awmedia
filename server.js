@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
 const apify = new ApifyClient({ token: process.env.APIFY_TOKEN });
-const anthropic = new Anthropic.default();
+const anthropic = new (Anthropic.default || Anthropic)();
 
 const REELS_LIMIT = 5;
 
@@ -113,7 +113,7 @@ ${JSON.stringify(reelSummaries, null, 2)}`;
   }
 });
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

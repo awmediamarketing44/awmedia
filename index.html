@@ -3,872 +3,307 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Reel Reviewer — Instant Instagram Audit</title>
-  <meta name="description" content="Get an AI-powered audit of any public Instagram account's reels. Scores for hook, clarity, pacing, and CTA — plus actionable recommendations." />
+  <title>Website Audit for Fitness Coaches & Gym Owners | Free Expert Review</title>
+  <meta name="description" content="Get a free, expert website audit built for fitness coaches, personal trainers and gym owners. Find out what's stopping your site from converting visitors into leads, bookings and memberships." />
+  <meta property="og:title" content="Free Website Audit for Fitness Coaches & Gyms" />
+  <meta property="og:description" content="Your website should be your best salesperson. Find out what's holding it back with a free, expert audit built for the fitness industry." />
+  <meta property="og:type" content="website" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <style>
-    :root {
-      --bg: #000000;
-      --panel: #0a0a0a;
-      --panel-2: #0f0f0f;
-      --border: #1a1a1a;
-      --border-hover: #2a2a2a;
-      --text: #f5f5f5;
-      --muted: #8a8a8a;
-      --accent: #F92672;
-      --accent-soft: rgba(249, 38, 114, 0.10);
-      --accent-glow: rgba(249, 38, 114, 0.25);
-      --danger: #ff5c7a;
-      --radius: 14px;
-      --radius-sm: 10px;
-      --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    body {
-      min-height: 100vh;
-      background: var(--bg);
-      color: var(--text);
-      font-family: "Rethink Sans", system-ui, -apple-system, sans-serif;
-      font-size: 15px;
-      line-height: 1.5;
-    }
-
-    .bg-glow {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 600px;
-      background:
-        radial-gradient(ellipse 60% 50% at 20% 0%, rgba(249, 38, 114, 0.08), transparent),
-        radial-gradient(ellipse 40% 40% at 80% 5%, rgba(249, 38, 114, 0.05), transparent);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .wrap {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 56px 24px 96px;
-    }
-
-    /* ── Hero ── */
-    .hero {
-      margin-bottom: 32px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border: 1px solid rgba(249, 38, 114, 0.25);
-      background: var(--accent-soft);
-      color: var(--accent);
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .eyebrow::before {
-      content: "";
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-    }
-
-    h1 {
-      margin: 20px 0 16px;
-      font-size: clamp(32px, 5.5vw, 56px);
-      line-height: 1.0;
-      letter-spacing: -0.035em;
-      font-weight: 800;
-      max-width: 720px;
-    }
-
-    .accent {
-      color: var(--accent);
-    }
-
-    .subtext {
-      max-width: 540px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.6;
-    }
-
-    /* ── Panels ── */
-    .panel {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    /* ── Search ── */
-    .search-panel {
-      margin-top: 32px;
-      padding: 20px;
-    }
-
-    .search-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .input-wrap {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 0 16px;
-      min-height: 52px;
-      transition: border-color 0.2s;
-    }
-
-    .input-wrap:focus-within {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-soft);
-    }
-
-    .input-prefix {
-      color: var(--accent);
-      font-weight: 700;
-      font-size: 16px;
-      user-select: none;
-    }
-
-    input {
-      width: 100%;
-      border: none;
-      outline: none;
-      background: transparent;
-      color: var(--text);
-      font-family: inherit;
-      font-size: 16px;
-      padding: 14px 0;
-    }
-
-    input::placeholder {
-      color: #555;
-    }
-
-    .btn {
-      border: none;
-      outline: none;
-      cursor: pointer;
-      min-height: 52px;
-      padding: 0 28px;
-      border-radius: var(--radius-sm);
-      font-family: inherit;
-      font-size: 15px;
-      font-weight: 700;
-      background: var(--accent);
-      color: white;
-      transition: transform 0.15s, opacity 0.15s, box-shadow 0.15s;
-      box-shadow: 0 4px 16px rgba(249, 38, 114, 0.3);
-      white-space: nowrap;
-      letter-spacing: -0.01em;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 24px rgba(249, 38, 114, 0.4);
-    }
-
-    .btn:active {
-      transform: translateY(0);
-    }
-
-    .btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
-
-    .meta {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: 12px;
-      letter-spacing: 0.01em;
-    }
-
-    .meta span::before {
-      content: "\2022";
-      margin-right: 6px;
-      opacity: 0.4;
-    }
-
-    .meta span:first-child::before {
-      display: none;
-    }
-
-    .status,
-    .error {
-      margin-top: 14px;
-      font-size: 14px;
-    }
-
-    .status {
-      color: var(--muted);
-    }
-
-    .error {
-      color: var(--danger);
-      font-weight: 600;
-    }
-
-    /* ── Results ── */
-    .results {
-      margin-top: 28px;
-      display: grid;
-      gap: 20px;
-    }
-
-    /* ── Summary Card ── */
-    .summary-card {
-      padding: 28px;
-    }
-
-    .summary-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 24px;
-      align-items: flex-start;
-    }
-
-    .profile-name {
-      font-size: 24px;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      font-weight: 800;
-    }
-
-    .profile-name span {
-      color: var(--accent);
-    }
-
-    .verdict {
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.6;
-      max-width: 600px;
-    }
-
-    .score-badge {
-      flex-shrink: 0;
-      text-align: center;
-      padding: 16px 20px;
-      border-radius: var(--radius);
-      background: linear-gradient(135deg, rgba(249,38,114,0.14), rgba(249,38,114,0.06));
-      border: 1px solid rgba(249,38,114,0.2);
-    }
-
-    .score-badge .label {
-      display: block;
-      color: var(--muted);
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .score-badge .value {
-      display: block;
-      font-size: 36px;
-      line-height: 1;
-      font-weight: 800;
-      color: var(--accent);
-      letter-spacing: -0.04em;
-    }
-
-    .summary-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .mini-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 16px;
-    }
-
-    .mini-card h3 {
-      margin: 0 0 10px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .mini-card ul {
-      margin: 0;
-      padding-left: 16px;
-    }
-
-    .mini-card li {
-      margin-bottom: 6px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .mini-card li:last-child {
-      margin-bottom: 0;
-    }
-
-    /* ── Section Title ── */
-    .section-title {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin: 4px 0 0;
-    }
-
-    /* ── Reel Cards ── */
-    .reels-grid {
-      display: grid;
-      gap: 16px;
-    }
-
-    .reel-card {
-      padding: 24px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      transition: border-color 0.2s;
-    }
-
-    .reel-card:hover {
-      border-color: var(--border-hover);
-    }
-
-    .reel-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    .reel-title {
-      font-size: 17px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      height: 32px;
-      padding: 0 12px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      border: 1px solid rgba(249, 38, 114, 0.2);
-      color: var(--accent);
-      font-size: 13px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-
-    .metric {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 12px;
-    }
-
-    .metric-label {
-      font-size: 10px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .metric-value {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    /* ── Content Boxes ── */
-    .caption-box,
-    .summary-box,
-    .suggestion-box {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 16px;
-      margin-top: 10px;
-    }
-
-    .box-label {
-      display: block;
-      color: var(--accent);
-      font-weight: 700;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 8px;
-    }
-
-    .caption-text,
-    .summary-text,
-    .suggestion-text {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.65;
-      word-break: break-word;
-    }
-
-    /* ── Scores Grid ── */
-    .scores-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .score-item {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 12px 8px;
-      text-align: center;
-    }
-
-    .score-item .k {
-      display: block;
-      color: var(--muted);
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .score-item .v {
-      display: block;
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--accent);
-      letter-spacing: -0.03em;
-    }
-
-    .improvements-list {
-      margin: 10px 0 0;
-      padding-left: 16px;
-    }
-
-    .improvements-list li {
-      color: var(--muted);
-      margin-bottom: 6px;
-      font-size: 14px;
-      line-height: 1.55;
-    }
-
-    .improvements-list li:last-child {
-      margin-bottom: 0;
-    }
-
-    .empty {
-      padding: 32px 24px;
-      color: var(--muted);
-      text-align: center;
-      font-size: 14px;
-      border: 1px dashed var(--border);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,0.01);
-    }
-
-    /* ── Loading Spinner ── */
-    .spinner {
-      display: inline-block;
-      width: 14px;
-      height: 14px;
-      border: 2px solid rgba(249, 38, 114, 0.2);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 0.6s linear infinite;
-      vertical-align: middle;
-      margin-right: 8px;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 768px) {
-      .wrap {
-        padding: 36px 16px 64px;
-      }
-
-      .summary-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .summary-top {
-        flex-direction: column;
-      }
-
-      .score-badge {
-        align-self: flex-start;
-      }
-
-      .metrics {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .scores-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .summary-card,
-      .reel-card {
-        padding: 20px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .wrap {
-        padding: 28px 14px 56px;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-
-      .search-row {
-        grid-template-columns: 1fr;
-      }
-
-      .btn {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .scores-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .summary-card,
-      .reel-card {
-        padding: 16px;
-      }
-
-      .meta {
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      .meta span::before {
-        display: none;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="bg-glow" aria-hidden="true"></div>
 
-  <div class="wrap">
-    <section class="hero">
-      <span class="eyebrow">AI-Powered Analysis</span>
-      <h1>
-        Get a free <span class="accent">reel audit</span> in seconds
-      </h1>
-      <p class="subtext">
-        Drop any public Instagram handle and get scored on hook strength, clarity,
-        pacing, and CTA quality — with specific fixes to boost engagement.
-      </p>
-    </section>
+  <!-- ── Header ── -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">AW<span>Media</span></a>
+      <nav class="nav" id="nav">
+        <a href="#audit" class="nav-link">What's Included</a>
+        <a href="#why" class="nav-link">Why This Matters</a>
+        <a href="#how" class="nav-link">How It Works</a>
+        <a href="#form" class="btn btn--sm">Get Your Free Audit</a>
+      </nav>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
 
-    <section class="panel search-panel">
-      <div class="search-row">
-        <div class="input-wrap">
-          <span class="input-prefix">@</span>
-          <input
-            id="username"
-            type="text"
-            value="harankiru"
-            placeholder="Enter any public username"
-            autocomplete="off"
-            spellcheck="false"
-          />
+  <!-- ── Hero ── -->
+  <section class="hero" id="hero">
+    <div class="bg-glow" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <span class="eyebrow">Free Website Audit for Fitness Businesses</span>
+        <h1>Your website should bring in clients.<br /><span class="accent">Does it?</span></h1>
+        <p class="hero-sub">
+          Most fitness coaches, personal trainers and gym owners are losing leads every day
+          because of outdated design, unclear offers and weak calls to action.
+          A free website audit shows you exactly what to fix.
+        </p>
+        <div class="hero-btns">
+          <a href="#form" class="btn btn--lg">Get Your Free Audit</a>
+          <a href="#audit" class="btn btn--outline btn--lg">See What's Included</a>
         </div>
-        <button id="reviewBtn" class="btn">Audit Reels</button>
+        <div class="hero-trust">
+          <div class="trust-item">
+            <span class="trust-dot"></span>Design &amp; UX reviewed
+          </div>
+          <div class="trust-item">
+            <span class="trust-dot"></span>Mobile experience checked
+          </div>
+          <div class="trust-item">
+            <span class="trust-dot"></span>Actionable recommendations
+          </div>
+        </div>
       </div>
-
-      <div class="meta">
-        <span>Public accounts only</span>
-        <span>Analyses up to 5 recent reels</span>
-        <span>Takes 30-60 seconds</span>
+      <div class="hero-visual">
+        <div class="audit-preview">
+          <div class="audit-preview-header">
+            <span class="audit-preview-dot" style="background:#ff5f57"></span>
+            <span class="audit-preview-dot" style="background:#febc2e"></span>
+            <span class="audit-preview-dot" style="background:#28c840"></span>
+            <span class="audit-preview-title">Website Audit Report</span>
+          </div>
+          <div class="audit-preview-body">
+            <div class="audit-row">
+              <span class="audit-label">Design &amp; Branding</span>
+              <div class="audit-bar"><div class="audit-fill" style="width:45%"></div></div>
+              <span class="audit-score">4.5</span>
+            </div>
+            <div class="audit-row">
+              <span class="audit-label">Mobile Experience</span>
+              <div class="audit-bar"><div class="audit-fill" style="width:35%"></div></div>
+              <span class="audit-score">3.5</span>
+            </div>
+            <div class="audit-row">
+              <span class="audit-label">Conversion Flow</span>
+              <div class="audit-bar"><div class="audit-fill" style="width:28%"></div></div>
+              <span class="audit-score">2.8</span>
+            </div>
+            <div class="audit-row">
+              <span class="audit-label">SEO Foundations</span>
+              <div class="audit-bar"><div class="audit-fill" style="width:52%"></div></div>
+              <span class="audit-score">5.2</span>
+            </div>
+            <div class="audit-row">
+              <span class="audit-label">Page Speed</span>
+              <div class="audit-bar"><div class="audit-fill" style="width:40%"></div></div>
+              <span class="audit-score">4.0</span>
+            </div>
+            <div class="audit-overall">
+              <span>Overall Score</span>
+              <span class="audit-overall-score">4.0<small>/10</small></span>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+  </section>
 
-      <div id="status" class="status" role="status" aria-live="polite"></div>
-      <div id="error" class="error" role="alert"></div>
-    </section>
+  <!-- ── What the Audit Includes ── -->
+  <section class="section" id="audit">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">What's Included</span>
+        <h2>A complete review of what's working<br />and what's costing you leads</h2>
+        <p class="section-sub">Every audit covers six key areas that directly affect whether your website converts visitors into enquiries, bookings and memberships.</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          </div>
+          <h3>Design &amp; Branding</h3>
+          <p>Does your site look like a premium fitness brand or a template from 2018? We review layout, typography, colour use and visual consistency to see if your brand builds trust at first glance.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+          </div>
+          <h3>User Experience</h3>
+          <p>Can a potential client land on your site and immediately understand what you offer, who it's for and what to do next? We check navigation, structure and clarity so nothing gets in the way of a booking.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+          </div>
+          <h3>Conversion Review</h3>
+          <p>Traffic means nothing without conversions. We look at your calls to action, lead capture, offer positioning and booking flow to find where potential clients are dropping off.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+          </div>
+          <h3>Mobile Experience</h3>
+          <p>Most of your audience will visit on their phone. We test how your site looks, loads and functions on mobile — because a poor mobile experience means lost enquiries.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          </div>
+          <h3>SEO Foundations</h3>
+          <p>Are you showing up when someone searches for a personal trainer or gym in your area? We review your title tags, meta descriptions, headings and basic on-page structure.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3>Speed &amp; Technical</h3>
+          <p>Slow sites lose visitors. We check load times, image sizes, core web vitals and technical issues that could be silently hurting your search rankings and user experience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section id="results" class="results" aria-label="Audit results"></section>
-  </div>
+  <!-- ── Why Fitness Businesses Need This ── -->
+  <section class="section section--alt" id="why">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">The Problem</span>
+        <h2>Why fitness businesses lose leads<br />before a conversation even starts</h2>
+        <p class="section-sub">Your website is often the first impression someone has of your business. If it doesn't build trust quickly, they'll leave — and book with someone else.</p>
+      </div>
+      <div class="problems-grid">
+        <div class="problem-card">
+          <span class="problem-number">01</span>
+          <h3>Confusing offers</h3>
+          <p>If a visitor can't immediately understand what you offer, who it's for and how to get started, they won't stick around to figure it out. Clarity converts.</p>
+        </div>
+        <div class="problem-card">
+          <span class="problem-number">02</span>
+          <h3>Low trust signals</h3>
+          <p>No testimonials, no clear branding, no professional photography. Without trust, visitors won't hand over their email — let alone book a consultation.</p>
+        </div>
+        <div class="problem-card">
+          <span class="problem-number">03</span>
+          <h3>Poor structure</h3>
+          <p>Pages that don't guide the visitor towards an action. No clear path from landing on the site to enquiring, booking or signing up. Every extra click is a lost lead.</p>
+        </div>
+        <div class="problem-card">
+          <span class="problem-number">04</span>
+          <h3>Weak mobile experience</h3>
+          <p>Over 70% of your visitors are on their phone. If your site is slow, hard to read or difficult to navigate on mobile, you're turning away the majority of your traffic.</p>
+        </div>
+        <div class="problem-card">
+          <span class="problem-number">05</span>
+          <h3>Outdated visuals</h3>
+          <p>A site that looks like it hasn't been updated in years tells potential clients that your business might be the same. Premium services need premium presentation.</p>
+        </div>
+        <div class="problem-card">
+          <span class="problem-number">06</span>
+          <h3>No clear next step</h3>
+          <p>Every page should have a clear call to action. If your visitor finishes reading and doesn't know what to do next, that's a missed opportunity for a booking or enquiry.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <script>
-    const usernameInput = document.getElementById("username");
-    const reviewBtn = document.getElementById("reviewBtn");
-    const statusEl = document.getElementById("status");
-    const errorEl = document.getElementById("error");
-    const resultsEl = document.getElementById("results");
+  <!-- ── How It Works ── -->
+  <section class="section" id="how">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">How It Works</span>
+        <h2>Three simple steps to a<br />better-performing website</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Submit your website</h3>
+          <p>Fill in the short form below with your name, email and website URL. That's all we need to get started.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>We review everything</h3>
+          <p>We manually review your site across design, UX, mobile, conversion, SEO and speed — no automated scans, just real expertise.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Get your action plan</h3>
+          <p>You receive a clear, prioritised list of what to fix and why — so you know exactly where to focus to get more enquiries and bookings.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    function esc(str) {
-      if (str === null || str === undefined) return "";
-      return String(str)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
+  <!-- ── Trust / Authority ── -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="trust-card">
+        <div class="trust-card-accent" aria-hidden="true"></div>
+        <blockquote>
+          <p>"Your website isn't a brochure — it's your most important salesperson. If it's not converting visitors into leads, consultations and memberships, it's costing you money every single day."</p>
+        </blockquote>
+        <div class="trust-card-footer">
+          <span class="trust-card-label">Built for fitness businesses that want to grow</span>
+          <p>We specialise in helping fitness coaches, personal trainers and gym owners turn their websites into client-generating machines. Every audit is reviewed by hand, tailored to your niche and designed to give you a clear path forward.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    function fmtNum(value) {
-      if (value === null || value === undefined || value === "") return "—";
-      const num = Number(value);
-      if (Number.isNaN(num)) return esc(String(value));
-      return new Intl.NumberFormat("en-GB").format(num);
-    }
-
-    function arr(value) {
-      return Array.isArray(value) ? value : [];
-    }
-
-    function txt(value, fallback) {
-      if (value === null || value === undefined || value === "") return fallback || "—";
-      return String(value);
-    }
-
-    function score(value) {
-      if (value === null || value === undefined || value === "") return "—";
-      return esc(String(value));
-    }
-
-    function renderSummary(data) {
-      const username = txt(data.username, "unknown");
-      const summary = data.summary || {};
-      const s = summary.score != null ? summary.score : "—";
-      const verdict = txt(summary.verdict, "No verdict returned.");
-      const strengths = arr(summary.strengths);
-      const weaknesses = arr(summary.weaknesses);
-      const recommendations = arr(summary.recommendations);
-
-      return `
-        <article class="panel summary-card">
-          <div class="summary-top">
-            <div>
-              <h2 class="profile-name">Audit for <span>@${esc(username)}</span></h2>
-              <p class="verdict">${esc(verdict)}</p>
+  <!-- ── Lead Form ── -->
+  <section class="section" id="form">
+    <div class="container">
+      <div class="form-wrapper">
+        <div class="form-header">
+          <span class="eyebrow">Get Started</span>
+          <h2>Request your free website audit</h2>
+          <p class="section-sub">Tell us about your fitness business and we'll send you a detailed review of your website with clear, actionable recommendations.</p>
+        </div>
+        <form id="auditForm" class="audit-form" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">Full Name <span class="required">*</span></label>
+              <input type="text" id="name" name="name" placeholder="e.g. Sarah Mitchell" required />
+              <span class="field-error" id="nameError"></span>
             </div>
-            <div class="score-badge">
-              <span class="label">Overall</span>
-              <span class="value">${esc(String(s))}<small style="font-size:16px;opacity:0.5">/10</small></span>
+            <div class="form-group">
+              <label for="email">Email Address <span class="required">*</span></label>
+              <input type="email" id="email" name="email" placeholder="e.g. sarah@example.com" required />
+              <span class="field-error" id="emailError"></span>
+            </div>
+            <div class="form-group">
+              <label for="business">Business Name <span class="required">*</span></label>
+              <input type="text" id="business" name="business" placeholder="e.g. Mitchell Fitness" required />
+              <span class="field-error" id="businessError"></span>
+            </div>
+            <div class="form-group">
+              <label for="website">Website URL <span class="required">*</span></label>
+              <input type="url" id="website" name="website" placeholder="e.g. https://mitchellfitness.com" required />
+              <span class="field-error" id="websiteError"></span>
+            </div>
+            <div class="form-group form-group--full">
+              <label for="message">Anything else we should know?</label>
+              <textarea id="message" name="message" rows="4" placeholder="e.g. I mainly want to get more online coaching enquiries"></textarea>
             </div>
           </div>
-
-          <div class="summary-grid">
-            <div class="mini-card">
-              <h3>Strengths</h3>
-              ${strengths.length
-                ? `<ul>${strengths.map(i => `<li>${esc(i)}</li>`).join("")}</ul>`
-                : `<p class="summary-text">None identified.</p>`}
-            </div>
-            <div class="mini-card">
-              <h3>Weaknesses</h3>
-              ${weaknesses.length
-                ? `<ul>${weaknesses.map(i => `<li>${esc(i)}</li>`).join("")}</ul>`
-                : `<p class="summary-text">None identified.</p>`}
-            </div>
-            <div class="mini-card">
-              <h3>Recommendations</h3>
-              ${recommendations.length
-                ? `<ul>${recommendations.map(i => `<li>${esc(i)}</li>`).join("")}</ul>`
-                : `<p class="summary-text">None available.</p>`}
-            </div>
+          <button type="submit" class="btn btn--lg btn--full" id="submitBtn">Request My Free Audit</button>
+          <p class="form-note">Your details are only used to deliver the audit. No spam, no mailing lists. This form can be connected to <a href="https://formspree.io" target="_blank" rel="noopener noreferrer">Formspree</a> or any backend endpoint.</p>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <div class="success-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           </div>
-        </article>`;
-    }
+          <h3>Audit request received</h3>
+          <p>Thanks for submitting your website. We'll review it and get back to you with a detailed audit and action plan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    function renderReelCard(reel, index) {
-      const r = reel.review || {};
-      const caption = txt(reel.caption, "No caption.");
-      const views = fmtNum(reel.views);
-      const likes = fmtNum(reel.likes);
-      const comments = fmtNum(reel.comments);
-      const duration = reel.duration != null && reel.duration !== ""
-        ? `${esc(String(reel.duration))}s` : "—";
-      const improvements = arr(r.improvements);
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>&copy; 2026 AW Media. All rights reserved.</p>
+      <a href="#form" class="footer-cta">Get Your Free Audit</a>
+    </div>
+  </footer>
 
-      return `
-        <article class="reel-card">
-          <div class="reel-head">
-            <h3 class="reel-title">Reel ${index + 1}</h3>
-            <div class="pill">Score: ${score(r.overall_score)}/10</div>
-          </div>
-
-          <div class="metrics">
-            <div class="metric">
-              <div class="metric-label">Views</div>
-              <div class="metric-value">${views}</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">Likes</div>
-              <div class="metric-value">${likes}</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">Comments</div>
-              <div class="metric-value">${comments}</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">Duration</div>
-              <div class="metric-value">${duration}</div>
-            </div>
-          </div>
-
-          <div class="caption-box">
-            <span class="box-label">Caption</span>
-            <p class="caption-text">${esc(caption)}</p>
-          </div>
-
-          <div class="scores-grid">
-            <div class="score-item"><span class="k">Hook</span><span class="v">${score(r.hook_score)}</span></div>
-            <div class="score-item"><span class="k">Clarity</span><span class="v">${score(r.clarity_score)}</span></div>
-            <div class="score-item"><span class="k">Pacing</span><span class="v">${score(r.pacing_score)}</span></div>
-            <div class="score-item"><span class="k">CTA</span><span class="v">${score(r.cta_score)}</span></div>
-            <div class="score-item"><span class="k">Overall</span><span class="v">${score(r.overall_score)}</span></div>
-          </div>
-
-          <div class="summary-box">
-            <span class="box-label">AI Review</span>
-            <p class="summary-text">${esc(txt(r.summary, "No review available."))}</p>
-            ${improvements.length
-              ? `<ul class="improvements-list">${improvements.map(i => `<li>${esc(i)}</li>`).join("")}</ul>`
-              : ""}
-          </div>
-
-          <div class="suggestion-box">
-            <span class="box-label">Suggested Hook</span>
-            <p class="suggestion-text">${esc(txt(r.suggested_hook, "No suggestion."))}</p>
-          </div>
-
-          <div class="suggestion-box">
-            <span class="box-label">Suggested CTA</span>
-            <p class="suggestion-text">${esc(txt(r.suggested_cta, "No suggestion."))}</p>
-          </div>
-        </article>`;
-    }
-
-    function renderResults(data) {
-      const reels = arr(data.reels);
-
-      if (!reels.length) {
-        resultsEl.innerHTML = `
-          ${renderSummary(data)}
-          <div class="empty">No reels were returned for this account.</div>`;
-        return;
-      }
-
-      resultsEl.innerHTML = `
-        ${renderSummary(data)}
-        <h2 class="section-title">Reel-by-Reel Breakdown</h2>
-        <section class="reels-grid">
-          ${reels.map((reel, i) => renderReelCard(reel, i)).join("")}
-        </section>`;
-    }
-
-    async function reviewReels() {
-      const username = usernameInput.value.trim().replace(/^@+/, "");
-      errorEl.textContent = "";
-      resultsEl.innerHTML = "";
-
-      if (!username) {
-        errorEl.textContent = "Enter a username to get started.";
-        return;
-      }
-
-      reviewBtn.disabled = true;
-      statusEl.innerHTML = '<span class="spinner"></span>Scraping and analysing reels for @' + esc(username) + '...';
-
-      try {
-        const res = await fetch("/api/review", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username }),
-        });
-
-        const data = await res.json().catch(() => ({}));
-
-        if (!res.ok) {
-          throw new Error(data.error || "Failed to review reels.");
-        }
-
-        statusEl.innerHTML = "";
-        renderResults(data);
-      } catch (err) {
-        statusEl.innerHTML = "";
-        errorEl.textContent = err.message || "Something went wrong.";
-      } finally {
-        reviewBtn.disabled = false;
-      }
-    }
-
-    reviewBtn.addEventListener("click", reviewReels);
-    usernameInput.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") reviewReels();
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
